@@ -1,0 +1,151 @@
+/* ตั้งค่าพื้นฐาน */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('pic/bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            height: 100vh; /* ให้ความสูงเต็มหน้าจอพอดี */
+            display: flex;
+            align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+            justify-content: center; /* จัดให้อยู่กึ่งกลางแนวนอน */
+            overflow: hidden; /* ซ่อนส่วนที่ล้นหน้าจอ */
+        }
+
+        /* เลย์เอาต์หลัก แบ่ง 2 ฝั่ง */
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 80%;
+            padding: 0 50px;
+        }
+
+        /* ฝั่งซ้าย: โลโก้ และ คำคม */
+        .left-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 50px;
+            position: relative; /* เผื่อใช้ล็อกตำแหน่งรูปกราฟิกหนังสือ */
+            left: -300px; /* ขยับซ้าย */
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .logo-area h1 { margin: 0; font-size: 28px; color: #000; }
+        .logo-area p { margin: 0; font-size: 14px; color: #555; }
+        .quote {
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* ฝั่งขวา: ฟอร์มล็อกอิน */
+        .right-side {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .login-box {
+            background-color: white;
+            border: 2px solid #8b1c85; /* กรอบสีม่วงเข้ม */
+            border-radius: 30px;
+            padding: 50px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(139, 28, 133, 0.1); /* เงาอ่อนๆ */
+        }
+        .login-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #000;
+        }
+
+        /* ช่องกรอกข้อมูล */
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-sizing: border-box; /* ให้ padding ไม่ดันขนาดช่องให้กว้างเกิน */
+            outline: none;
+        }
+        .input-field:focus {
+            border-color: #8b1c85; /* เปลี่ยนสีกรอบเวลาคลิกพิมพ์ */
+        }
+
+        /* ปุ่ม Login */
+        .btn-login {
+            background-color: white;
+            color: #000;
+            border: 1px solid #ccc;
+            padding: 12px 40px;
+            font-size: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            border-color: #8b1c85;
+            background-color: #f9f0f7;
+        }
+
+        /* ข้อความล่างสุด */
+        .signup-text {
+            font-size: 16px;
+            color: #000;
+        }
+        .signup-link {
+            color: #0095d9; /* สีฟ้า */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+        /* สไตล์พิเศษสำหรับช่องวันเกิด (แบ่ง 3 ช่องติดกัน) */
+        .dob-group {
+            display: flex;
+            border: 1px solid #ccc; /* สีกรอบรวม */
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden; /* บังคับให้ขอบมนใช้ได้กับลูกๆ ข้างใน */
+        }
+        .dob-group select {
+            flex: 1;
+            border: none;
+            padding: 15px 10px;
+            font-size: 16px;
+            outline: none;
+            background: transparent;
+            cursor: pointer; /* ให้เมาส์เปลี่ยนเป็นรูปนิ้วมือเวลาชี้ */
+            color: #555;
+}
+        /* ใส่เส้นกั้นตรงกลางระหว่างช่อง Date, Month, Year */
+        .dob-group input:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+        /* เปลี่ยนสีทั้งกรอบรวมเวลาคลิกช่องใดช่องหนึ่ง */
+        .dob-group:focus-within {
+            border-color: #8b1c85;
+        }
+
+        .input-field:focus { border-color: #8b1c85; }

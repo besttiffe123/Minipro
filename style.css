@@ -1,7 +1,7 @@
 body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('homebg.png');
+            background-image: url('pic/homebg.png');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -49,6 +49,57 @@ body {
             outline: none;
             width: 100%;
             margin-left: 10px;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-dropdown {
+            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 250px;
+            background-color: white;
+            border: 1px solid #8b1c85;
+            border-radius: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 200;
+            color: #000;
+        }
+
+        /* คลาสที่ใช้แสดง Dropdown เมื่อกดปุ่ม */
+        .search-dropdown.show {
+            display: block;
+        }
+        .dropdown-header {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        .dropdown-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px 10px; /* ขยับตัวเลือกเข้าด้านในเล็กน้อย */
+        }
+        .dropdown-list li {
+            margin-bottom: 8px;
+        }
+        .dropdown-list a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            display: block;
+        }
+        .dropdown-list a:hover {
+            color: #8b1c85;
+            font-weight: bold;
+        }
+        .dropdown-divider {
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 15px 0;
         }
 
         /* เลย์เอาต์หลัก */
@@ -148,6 +199,32 @@ body {
             font-size: 24px;
             box-shadow: 0 4px 10px rgba(139, 28, 133, 0.5);
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .floating-cart:hover {
+        background-color: #61135d; /* สีม่วงที่เข้มขึ้น */
+        transform: scale(1.05); /* (ตัวเลือกเสริม) ทำให้ปุ่มขยายขึ้นเล็กน้อยเวลานำเมาส์ไปชี้ */
+}
+        
+
+        /* ปุ่ม Download และ Read now ในการ์ด */
+        .card-actions {
+            display: flex;
+            gap: 10px; /* ระยะห่างระหว่าง 2 ปุ่ม */
+        }
+        .btn-action {
+            flex: 1; /* แบ่งความกว้างให้เท่ากัน 50/50 */
+            background-color: #9c00a6; /* สีม่วงตามดีไซน์ */
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 20px; /* มุมมน */
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-action:hover {
+            background-color: #7a0082; /* สีเข้มขึ้นตอนเอาเมาส์ชี้ */
         }
 
         .profile-section {
