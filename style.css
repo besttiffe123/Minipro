@@ -1,0 +1,205 @@
+body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('homebg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* แถบด้านบน (Header) */
+        .topbar {
+            background: linear-gradient(to right, #dca8d2, #8b1c85);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 100; /* ทำให้ Topbar ลอยอยู่บนสุด ไม่โดนเนื้อหาอื่นทับ */
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+        .logo-area h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #000;
+        }
+        .logo-area p {
+            margin: 0;
+            font-size: 12px;
+            color: #333;
+        }
+        .search-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            width: 400px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        /* เลย์เอาต์หลัก */
+        .main-container {
+            display: flex;
+            padding: 30px;
+        }
+
+        /* เมนูด้านซ้าย (Sidebar) */
+        .sidebar {
+            width: 70px;
+            background: white;
+            border-radius: 40px;
+            border: 1px solid #dca8d2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            gap: 40px;
+            height: fit-content;
+            margin-right: 40px;
+
+            position: sticky;
+            top: 100px; /* ระยะห่างจากขอบจอบนสุด (เผื่อที่ให้ Topbar) */
+        }
+        .sidebar i {
+            font-size: 24px;
+            color: #8b1c85;
+            cursor: pointer;
+        }
+        .sidebar .active {
+            background: #8b1c85;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        /* ส่วนเนื้อหา (Content) */
+        .content {
+            flex-grow: 1;
+        }
+        .section-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        /* Grid สำหรับแสดงหนังสือ */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 230px);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .book-card {
+            background: white;
+            border: 1px solid #dca8d2;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: 400 px;
+        }
+        .book-cover {
+            background-color: #d9d9d9; /* สีเทาแทนรูปปก */
+            height: 320px;
+            width: 200px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .book-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .book-price {
+            color: #555;
+        }
+
+        /* ปุ่มตะกร้าลอยตัว (Floating Cart) */
+        .floating-cart {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #8b1c85;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(139, 28, 133, 0.5);
+            cursor: pointer;
+        }
+
+        .profile-section {
+            margin-top: 20px;
+        }
+        .info-group {
+            margin-bottom: 30px; /* ระยะห่างระหว่างกลุ่มข้อมูล */
+        }
+        .info-label {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .info-value {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        .link-change {
+            color: #0095d9; /* สีฟ้าตามดีไซน์ */
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .link-change:hover {
+            text-decoration: underline; /* ขีดเส้นใต้ตอนเอาเมาส์ชี้ */
+        }
+
+        /* ปุ่ม Logout */
+        .btn-logout {
+            background-color: #ff0000; /* สีแดง */
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-logout:hover {
+            background-color: #cc0000;
+        }
+
+        /* ปุ่ม Admin (มุมขวาล่าง) */
+        .btn-admin {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            background-color: #8b1c85;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+        }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Library - Onelight Ebook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo-area">
+            <i class="fa-solid fa-book-open" style="color: #8b1c85; font-size: 30px; margin-right: 10px;"></i>
+            <div>
+                <h1>Onelight</h1>
+                <p>Ebook online shop</p>
+            </div>
+        </div>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
+            <input type="text" placeholder="Search">
+            <i class="fa-solid fa-circle-chevron-down" style="color: #8b1c85;"></i>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- เมนูด้านซ้าย -->
+        <div class="sidebar">
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="library.html">
+                <i class="fa-solid fa-bookmark active"></i>
+            </a>
+            <a href="profile.html">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+
+        <!-- เนื้อหาหลัก -->
+        <div class="content">
+            <div class="section-header">
+                Your library <!-- เปลี่ยนชื่อหัวข้อ -->
+            </div>
+            
+            <div class="book-grid">
+                <!-- ใส่หนังสือ 1 เล่มตามที่ขอ -->
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book1</div>
+                    <!-- ส่วนปุ่มกด 2 ปุ่ม -->
+                    <div class="card-actions">
+                        <button class="btn-action">Download</button>
+                        <button class="btn-action">Read now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

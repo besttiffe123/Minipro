@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account - Onelight Ebook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo-area">
+            <i class="fa-solid fa-book-open" style="color: #8b1c85; font-size: 30px; margin-right: 10px;"></i>
+            <div>
+                <h1>Onelight</h1>
+                <p>Ebook online shop</p>
+            </div>
+        </div>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
+            <input type="text" placeholder="Search">
+            <i class="fa-solid fa-circle-chevron-down" style="color: #8b1c85;"></i>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- เมนูด้านซ้าย -->
+        <div class="sidebar">
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="library.html">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+            <a href="profile.html">
+                <i class="fa-solid fa-user active"></i> <!-- ย้าย active -->
+            </a> 
+        </div>
+
+        <!-- เนื้อหาหลัก -->
+        <div class="content">
+            <div class="section-header">
+                Your Account
+            </div>
+            
+            <div class="profile-section">
+                <!-- ข้อมูลชื่อผู้ใช้ -->
+                <div class="info-group">
+                    <div class="info-label">Your UserName</div>
+                    <div class="info-value">X</div>
+                    <a href="#" class="link-change">change username</a>
+                </div>
+
+                <!-- ข้อมูลวันเกิด -->
+                <div class="info-group">
+                    <div class="info-label">Date of Birth</div>
+                    <div class="info-value">00/00/0000</div>
+                </div>
+
+                <!-- ปุ่ม Logout -->
+                <button class="btn-logout">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ปุ่มสำหรับ Admin เท่านั้น -->
+    <button class="btn-admin">For admin only</button>
+
+</body>
+</html>

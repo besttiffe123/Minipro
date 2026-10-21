@@ -1,13 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    link rel="stylesheet" href="style.css">
+    <title>Onelight Ebook online shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1>test</h1>
-    <p>lorem ipsum dolor sit amet</p>
+
+    <!-- แถบด้านบน -->
+    <div class="topbar">
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+            <div>
+                <h1>Onelight</h1>
+                <p>Ebook online shop</p>
+            </div>
+        </div>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
+            <input type="text" placeholder="Search">
+            <i class="fa-solid fa-circle-chevron-down" style="color: #8b1c85;"></i>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- เมนูด้านซ้าย -->
+        <div class="sidebar">
+            <a href="index.html">
+                <i class="fa-solid fa-house active"></i>
+            </a>
+            <a href="library.html">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+            <a href="profile.html">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+
+        <!-- เนื้อหาหลัก -->
+        <div class="content">
+            <!-- หมวดหมู่ Newly releases -->
+            <div class="section-header">
+                Newly releases <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="book-grid">
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book1</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book2</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book3</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book4</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+            </div>
+
+            <!-- หมวดหมู่ Trending -->
+            <div class="section-header" style="margin-top: 20px;">
+                Trending <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="book-grid">
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book1</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book2</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book3</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-title">Book4</div>
+                    <div class="book-price">0.00B</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ปุ่มตะกร้า -->
+    <div class="floating-cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </div>
+
 </body>
 </html>
