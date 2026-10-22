@@ -30,10 +30,10 @@
                 <div class="dropdown-section">
                     <div class="dropdown-header">Type</div>
                     <ul class="dropdown-list">
-                        <li><a href="#">Novel</a></li>
-                        <li><a href="#">Comic</a></li>
-                        <li><a href="#">Manga</a></li>
-                        <li><a href="#">Artbook</a></li>
+                        <li><a href="Novel.html">Novel</a></li>
+                        <li><a href="Comic.html">Comic</a></li>
+                        <li><a href="Manga.html">Manga</a></li>
+                        <li><a href="Artbook.html">Artbook</a></li>
                     </ul>
                 </div>
 
@@ -42,12 +42,12 @@
                 <div class="dropdown-section">
                     <div class="dropdown-header">Genres</div>
                     <ul class="dropdown-list">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Sci-fi</a></li>
-                        <li><a href="#">Fantasy</a></li>
-                        <li><a href="#">Romance</a></li>
-                        <li><a href="#">Thriller</a></li>
-                        <li><a href="#">Horror</a></li>
+                        <li><a href="Action.html">Action</a></li>
+                        <li><a href="Sci-fi.html">Sci-fi</a></li>
+                        <li><a href="Fantasy.html">Fantasy</a></li>
+                        <li><a href="Romance.html">Romance</a></li>
+                        <li><a href="Thriller.html">Thriller</a></li>
+                        <li><a href="Horror.html">Horror</a></li>
                     </ul>
                 </div>
             </div>    
@@ -72,54 +72,26 @@
         <div class="content">
             <!-- หมวดหมู่ Newly releases -->
             <div class="section-header">
-                Newly releases <i class="fa-solid fa-caret-down"></i>
+                Newly releases <a href="Newreleases.html"><i class="fa-solid fa-caret-down"></i></a>
             </div>
             <div class="book-grid">
+                <a href="Details.html" style="text-decoration: none; color: inherit;">
                 <div class="book-card">
                     <div class="book-cover"></div>
                     <div class="book-title">Book1</div>
                     <div class="book-price">0.00B</div>
                 </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book2</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book3</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book4</div>
-                    <div class="book-price">0.00B</div>
-                </div>
+                </a>
             </div>
 
-            <!-- หมวดหมู่ Trending -->
+            <!-- หมวดหมู่ Novel -->
             <div class="section-header" style="margin-top: 20px;">
-                Trending <i class="fa-solid fa-caret-down"></i>
+                Novel <a href="Novel.html"><i class="fa-solid fa-caret-down"></i></a>
             </div>
             <div class="book-grid">
                 <div class="book-card">
                     <div class="book-cover"></div>
                     <div class="book-title">Book1</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book2</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book3</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book4</div>
                     <div class="book-price">0.00B</div>
                 </div>
             </div>
@@ -127,9 +99,11 @@
     </div>
 
     <!-- ปุ่มตะกร้า -->
-    <div class="floating-cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </div>
+    <a href="Basket.html">
+        <div class="floating-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </a>
 
     <script>
     const dropdownIcon = document.getElementById('dropdownIcon');
@@ -141,7 +115,7 @@
         searchDropdown.classList.toggle('show');
         
         // สลับไอคอนชี้ลง/ชี้ขึ้น
-        if (searchDropdown.classList.contains('show')) {
+        if (searchDropdown.classList.contains('show')) { //  เช็กดูว่า ตอนนี้ตัวเมนูค้นหา (searchDropdown) มีคำสั่ง (Class) ที่ชื่อว่า 'show' แปะอยู่ไหม?
             dropdownIcon.classList.remove('fa-circle-chevron-down');
             dropdownIcon.classList.add('fa-circle-chevron-up');
         } else {

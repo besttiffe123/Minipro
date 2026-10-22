@@ -20,8 +20,34 @@
         <div class="search-bar">
             <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
             <input type="text" placeholder="Search">
-            <i class="fa-solid fa-circle-chevron-down" style="color: #8b1c85;"></i>
+            <i class="fa-solid fa-circle-chevron-down" id="dropdownIcon" style="color: #8b1c85; cursor: pointer;"></i>
         </div>
+        <!-- เมนู Dropdown ที่ซ่อนอยู่ -->
+            <div class="search-dropdown" id="searchDropdown">
+                <div class="dropdown-section">
+                    <div class="dropdown-header">Type</div>
+                    <ul class="dropdown-list">
+                        <li><a href="Novel.html">Novel</a></li>
+                        <li><a href="Comic.html">Comic</a></li>
+                        <li><a href="Manga.html">Manga</a></li>
+                        <li><a href="Artbook.html">Artbook</a></li>
+                    </ul>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="dropdown-section">
+                    <div class="dropdown-header">Genres</div>
+                    <ul class="dropdown-list">
+                        <li><a href="Action.html">Action</a></li>
+                        <li><a href="Sci-fi.html">Sci-fi</a></li>
+                        <li><a href="Fantasy.html">Fantasy</a></li>
+                        <li><a href="Romance.html">Romance</a></li>
+                        <li><a href="Thriller.html">Thriller</a></li>
+                        <li><a href="Horror.html">Horror</a></li>
+                    </ul>
+                </div>
+            </div> 
     </div>
 
     <div class="main-container">
@@ -49,7 +75,7 @@
                 <div class="info-group">
                     <div class="info-label">Your UserName</div>
                     <div class="info-value">X</div>
-                    <a href="#" class="link-change">change username</a>
+                    <a href="Rename.html" class="link-change">change username</a>
                 </div>
 
                 <!-- ข้อมูลวันเกิด -->
@@ -68,6 +94,33 @@
 
     <!-- ปุ่มสำหรับ Admin เท่านั้น -->
     <button class="btn-admin">For admin only</button>
+<script>
+    const dropdownIcon = document.getElementById('dropdownIcon');
+    const searchDropdown = document.getElementById('searchDropdown');
 
+    // เมื่อคลิกที่ไอคอนลูกศร
+    dropdownIcon.addEventListener('click', function(event) {
+        event.stopPropagation(); // ป้องกันไม่ให้คลิกทะลุไปโดนส่วนอื่น
+        searchDropdown.classList.toggle('show');
+        
+        // สลับไอคอนชี้ลง/ชี้ขึ้น
+        if (searchDropdown.classList.contains('show')) { //  เช็กดูว่า ตอนนี้ตัวเมนูค้นหา (searchDropdown) มีคำสั่ง (Class) ที่ชื่อว่า 'show' แปะอยู่ไหม?
+            dropdownIcon.classList.remove('fa-circle-chevron-down');
+            dropdownIcon.classList.add('fa-circle-chevron-up');
+        } else {
+            dropdownIcon.classList.remove('fa-circle-chevron-up');
+            dropdownIcon.classList.add('fa-circle-chevron-down');
+        }
+    });
+
+    // ปิดเมนูอัตโนมัติหากผู้ใช้คลิกพื้นที่อื่นบนหน้าเว็บ
+    window.addEventListener('click', function(event) {
+        if (!document.querySelector('.search-container').contains(event.target)) {
+            searchDropdown.classList.remove('show');
+            dropdownIcon.classList.remove('fa-circle-chevron-up');
+            dropdownIcon.classList.add('fa-circle-chevron-down');
+        }
+    });
+</script>
 </body>
 </html>
