@@ -2,7 +2,7 @@
 $conn = new mysqli("localhost", "root", "", "ebook");
 $conn->set_charset("utf8mb4");
 if ($conn->connect_error) {
-    die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . $conn->connect_error);
+    die("Database connection failed: " . $conn->connect_error);
 }
 ?>
 
