@@ -1,9 +1,52 @@
+<?php
+session_start();
+// ตรวจสอบว่าล็อกอินหรือยัง
+if (!isset($_SESSION['uid'])) {
+    header("Location: login.php");
+    exit(); 
+}
+
+// เมื่อผู้ใช้กดปุ่ม Confirm (ส่งฟอร์มแบบ POST)
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $conn = new mysqli("localhost", "root", "", "ebook");
+    $conn->set_charset("utf8mb4");
+
+    if ($conn->connect_error) {
+        die("Database connection failed: " . $conn->connect_error);
+    }
+
+    $new_uname = trim($_POST['new_uname']);
+    $uid = $_SESSION['uid'];
+
+    // ตรวจสอบว่าไม่ได้กรอกค่าว่างมา
+    if (!empty($new_uname)) {
+        // อัปเดตชื่อผู้ใช้ในฐานข้อมูล
+        $stmt = $conn->prepare("UPDATE euser SET uname = ? WHERE uid = ?");
+        $stmt->bind_param("si", $new_uname, $uid);
+        
+        if ($stmt->execute()) {
+            // อัปเดตตัวแปร Session ให้เป็นชื่อใหม่ด้วย
+            $_SESSION['uname'] = $new_uname;
+            
+            echo "<script>
+                    alert('Username changed successfully!');
+                    window.location.href = 'profile.php';
+                  </script>";
+            exit();
+        } else {
+            echo "<script>alert('An error occurred while changing the username.');</script>";
+        }
+        $stmt->close();
+    }
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onelight Ebook online shop</title>
+    <title>Change Username - Onelight Ebook</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -25,7 +68,7 @@
                 <i class="fa-solid fa-circle-chevron-down" id="dropdownIcon" style="color: #8b1c85; cursor: pointer;"></i>
             </div>
 
-        <!-- เมนู Dropdown ที่ซ่อนอยู่ -->
+            <!-- เมนู Dropdown ที่ซ่อนอยู่ -->
             <div class="search-dropdown" id="searchDropdown">
                 <div class="dropdown-section">
                     <div class="dropdown-header">Type</div>
@@ -57,65 +100,49 @@
     <div class="main-container">
         <!-- เมนูด้านซ้าย -->
         <div class="sidebar">
-            <a href="index.html">
-                <i class="fa-solid fa-house active"></i>
+            <a href="index.php">
+                <i class="fa-solid fa-house"></i>
             </a>
-            <a href="library.html">
+            <a href="library.php">
                 <i class="fa-solid fa-bookmark"></i>
             </a>
-            <a href="profile.html">
-                <i class="fa-solid fa-user"></i>
+            <a href="profile.php">
+                <i class="fa-solid fa-user active"></i>
             </a>
         </div>
 
         <!-- เนื้อหาหลัก -->
         <div class="content">
-            <!-- หมวดหมู่ Newly releases -->
             <div class="section-header">
-                Newly releases <a href="Newreleases.html"><i class="fa-solid fa-caret-down"></i></a>
+                Your Account
             </div>
-            <div class="book-grid">
-                <a href="Details.html" style="text-decoration: none; color: inherit;">
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book1</div>
-                    <div class="book-price">0.00B</div>
+            
+            <!-- เปลี่ยนคลาสกรอบเป็น form เพื่อให้ส่งข้อมูลกลับไปหา PHP ด้านบนได้ -->
+            <form action="" method="POST" class="rename-section">
+                
+                <div class="rename-label">Enter your new username</div>
+                
+                <!-- ใส่ name="new_uname" เพื่อรับค่า และ required บังคับให้กรอกก่อนกด -->
+                <input type="text" name="new_uname" class="rename-input" required>
+                
+                <div class="rename-actions">
+                    <a href="profile.php" class="btn-cancel">Cancel</a>
+                    <button type="submit" class="btn-confirm">Confirm</button>
                 </div>
-                </a>
-            </div>
-
-            <!-- หมวดหมู่ Novel -->
-            <div class="section-header" style="margin-top: 20px;">
-                Novel <a href="Novel.html"><i class="fa-solid fa-caret-down"></i></a>
-            </div>
-            <div class="book-grid">
-                <div class="book-card">
-                    <div class="book-cover"></div>
-                    <div class="book-title">Book1</div>
-                    <div class="book-price">0.00B</div>
-                </div>
-            </div>
+                
+            </form>
         </div>
     </div>
-
-    <!-- ปุ่มตะกร้า -->
-    <a href="Basket.html">
-        <div class="floating-cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-    </a>
-
+    
     <script>
     const dropdownIcon = document.getElementById('dropdownIcon');
     const searchDropdown = document.getElementById('searchDropdown');
 
-    // เมื่อคลิกที่ไอคอนลูกศร
     dropdownIcon.addEventListener('click', function(event) {
-        event.stopPropagation(); // ป้องกันไม่ให้คลิกทะลุไปโดนส่วนอื่น
+        event.stopPropagation();
         searchDropdown.classList.toggle('show');
         
-        // สลับไอคอนชี้ลง/ชี้ขึ้น
-        if (searchDropdown.classList.contains('show')) { //  เช็กดูว่า ตอนนี้ตัวเมนูค้นหา (searchDropdown) มีคำสั่ง (Class) ที่ชื่อว่า 'show' แปะอยู่ไหม?
+        if (searchDropdown.classList.contains('show')) {
             dropdownIcon.classList.remove('fa-circle-chevron-down');
             dropdownIcon.classList.add('fa-circle-chevron-up');
         } else {
@@ -124,14 +151,14 @@
         }
     });
 
-    // ปิดเมนูอัตโนมัติหากผู้ใช้คลิกพื้นที่อื่นบนหน้าเว็บ
     window.addEventListener('click', function(event) {
-        if (!document.querySelector('.search-container').contains(event.target)) {
+        const searchContainer = document.querySelector('.search-container');
+        if (searchContainer && !searchContainer.contains(event.target)) {
             searchDropdown.classList.remove('show');
             dropdownIcon.classList.remove('fa-circle-chevron-up');
             dropdownIcon.classList.add('fa-circle-chevron-down');
         }
     });
-</script>
+    </script>
 </body>
 </html>

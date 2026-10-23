@@ -94,7 +94,7 @@ if ($conn->connect_error) {
     </a>
 
     <!-- ปุ่มกลับหน้าแรก -->
-    <a href="index.html" class="btn-back-home">back to home</a>
+    <a href="../index.php" class="btn-back-home">back to home</a>
 
 </body>
 </html>

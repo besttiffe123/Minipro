@@ -1,3 +1,38 @@
+<?php
+session_start();
+// ตรวจสอบว่าล็อกอินหรือยัง
+if (!isset($_SESSION['uid'])) {
+    header("Location: login.php");
+    exit(); 
+}
+
+// เชื่อมต่อฐานข้อมูล
+$conn = new mysqli("localhost", "root", "", "ebook");
+$conn->set_charset("utf8mb4");
+
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
+
+$uid = $_SESSION['uid'];
+
+// ดึงข้อมูลชื่อผู้ใช้และวันเกิด
+$stmt = $conn->prepare("SELECT uname, dob FROM euser WHERE uid = ?");
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $uname = htmlspecialchars($row['uname']);
+    // แปลงรูปแบบวันที่จาก YYYY-MM-DD เป็น DD/MM/YYYY เพื่อความสวยงาม
+    $dob = date("d/m/Y", strtotime($row['dob']));
+} else {
+    $uname = "ไม่พบข้อมูล";
+    $dob = "-";
+}
+$stmt->close();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -17,12 +52,21 @@
                 <p>Ebook online shop</p>
             </div>
         </div>
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
-            <input type="text" placeholder="Search">
-            <i class="fa-solid fa-circle-chevron-down" id="dropdownIcon" style="color: #8b1c85; cursor: pointer;"></i>
-        </div>
-        <!-- เมนู Dropdown ที่ซ่อนอยู่ -->
+        
+        <!-- search -->
+        <div class="search-container">
+    <div class="search-bar">
+        <!-- เพิ่ม form ครอบไว้ และชี้ไปที่ search.php -->
+        <form action="search.php" method="GET" style="display: flex; align-items: center; width: 100%; margin: 0; padding: 0;">
+            <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+                <i class="fa-solid fa-magnifying-glass" style="color: #8b1c85;"></i>
+            </button>
+            <!-- เพิ่ม name="q" เข้าไปเพื่อให้ PHP รู้จักคำที่ค้นหา -->
+            <input type="text" name="q" placeholder="Search" required style="border: none; outline: none; background: transparent; width: 100%; margin-left: 10px;">
+        </form>
+        <i class="fa-solid fa-circle-chevron-down" id="dropdownIcon" style="color: #8b1c85; cursor: pointer; margin-left: 10px;"></i>
+    </div>
+            <!-- เมนู Dropdown ที่ซ่อนอยู่ -->
             <div class="search-dropdown" id="searchDropdown">
                 <div class="dropdown-section">
                     <div class="dropdown-header">Type</div>
@@ -48,19 +92,20 @@
                     </ul>
                 </div>
             </div> 
+        </div>
     </div>
 
     <div class="main-container">
         <!-- เมนูด้านซ้าย -->
         <div class="sidebar">
-            <a href="index.html">
+            <a href="index.php">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="library.html">
+            <a href="library.php">
                 <i class="fa-solid fa-bookmark"></i>
             </a>
-            <a href="profile.html">
-                <i class="fa-solid fa-user active"></i> <!-- ย้าย active -->
+            <a href="profile.php">
+                <i class="fa-solid fa-user active"></i> 
             </a> 
         </div>
 
@@ -74,39 +119,38 @@
                 <!-- ข้อมูลชื่อผู้ใช้ -->
                 <div class="info-group">
                     <div class="info-label">Your UserName</div>
-                    <div class="info-value">X</div>
-                    <a href="Rename.html" class="link-change">change username</a>
+                    <div class="info-value"><?php echo $uname; ?></div>
+                    <a href="Rename.php" class="link-change">change username</a>
                 </div>
 
                 <!-- ข้อมูลวันเกิด -->
                 <div class="info-group">
                     <div class="info-label">Date of Birth</div>
-                    <div class="info-value">00/00/0000</div>
+                    <div class="info-value"><?php echo $dob; ?></div>
                 </div>
 
-                <!-- ปุ่ม Logout -->
-                 <a href="login.html">
-                <button class="btn-logout">Logout</button>
+                <!-- ปุ่ม Logout เปลี่ยนไปเรียกไฟล์ logout.php เพื่อล้าง Session -->
+                 <a href="logout.php">
+                    <button class="btn-logout">Logout</button>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- ปุ่มสำหรับ Admin เท่านั้น -->
-     <a href="admin/Foradmin.php">
+     <a href="admin/foradmin.php">
         <button class="btn-admin">For admin only</button>
     </a>
+
 <script>
     const dropdownIcon = document.getElementById('dropdownIcon');
     const searchDropdown = document.getElementById('searchDropdown');
 
-    // เมื่อคลิกที่ไอคอนลูกศร
     dropdownIcon.addEventListener('click', function(event) {
-        event.stopPropagation(); // ป้องกันไม่ให้คลิกทะลุไปโดนส่วนอื่น
+        event.stopPropagation(); 
         searchDropdown.classList.toggle('show');
         
-        // สลับไอคอนชี้ลง/ชี้ขึ้น
-        if (searchDropdown.classList.contains('show')) { //  เช็กดูว่า ตอนนี้ตัวเมนูค้นหา (searchDropdown) มีคำสั่ง (Class) ที่ชื่อว่า 'show' แปะอยู่ไหม?
+        if (searchDropdown.classList.contains('show')) { 
             dropdownIcon.classList.remove('fa-circle-chevron-down');
             dropdownIcon.classList.add('fa-circle-chevron-up');
         } else {
@@ -115,9 +159,9 @@
         }
     });
 
-    // ปิดเมนูอัตโนมัติหากผู้ใช้คลิกพื้นที่อื่นบนหน้าเว็บ
     window.addEventListener('click', function(event) {
-        if (!document.querySelector('.search-container').contains(event.target)) {
+        const searchContainer = document.querySelector('.search-container');
+        if (searchContainer && !searchContainer.contains(event.target)) {
             searchDropdown.classList.remove('show');
             dropdownIcon.classList.remove('fa-circle-chevron-up');
             dropdownIcon.classList.add('fa-circle-chevron-down');
