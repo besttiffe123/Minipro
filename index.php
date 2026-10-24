@@ -112,7 +112,7 @@ if ($conn->connect_error) {
             <div class="book-grid">
             <?php
                 // ดึงหนังสือ 4 เล่มล่าสุด
-                $sql_new = "SELECT bid, bname, price, bcover FROM books ORDER BY bid DESC LIMIT 4";
+                $sql_new = "SELECT bid, bname, price, bcover FROM books ORDER BY bid DESC LIMIT 7";
                 $result_new = $conn->query($sql_new);
 
                 if ($result_new->num_rows > 0) {
