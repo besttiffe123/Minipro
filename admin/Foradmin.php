@@ -62,7 +62,7 @@ if ($conn->connect_error) {
             <td><?php echo htmlspecialchars($row['pages'] ?? '-'); ?></td>
             <td><?php echo number_format($row['price'] ?? 0, 2); ?></td>
             <td><?php echo htmlspecialchars($row['genres'] ?? '-'); ?></td>
-            <td><?php echo htmlspecialchars(mb_substr($row['about'] ?? '', 0, 30)) . '...'; ?></td> <!-- ตัดข้อความ About ให้แสดงแค่ 30 ตัวอักษร ตารางจะได้ไม่ยืด -->
+            <td><?php echo htmlspecialchars(mb_substr($row['about'] ?? '', 0, 10)) . '...'; ?></td> <!-- ตัดข้อความ About ให้แสดงแค่ 30 ตัวอักษร ตารางจะได้ไม่ยืด -->
             <td><?php echo htmlspecialchars($row['bcover'] ?? '-'); ?></td>
             <td><?php echo htmlspecialchars($row['file'] ?? '-'); ?></td>
             

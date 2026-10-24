@@ -41,17 +41,36 @@ body {
         .admin-table {
             width: 100%;
             border-collapse: collapse; /* ให้เส้นตารางแนบสนิทกัน */
+            min-width: 1500px;
+            table-layout: auto;
         }
         .admin-table th {
             font-size: 22px;
             font-weight: 500;
             text-align: left;
-            padding-bottom: 15px;
+            padding: 14px 12px;
             border-bottom: 1px solid #333;
             color: #000;
+            white-space: nowrap;
         }
         .admin-table td {
-            padding: 20px 0;
+            padding: 14px 12px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .admin-table th:nth-child(7),
+        .admin-table td:nth-child(7) {
+            min-width: 150px;
+        }
+        /* เพิ่มพื้นที่คอลัมน์ cover */
+        .admin-table th:nth-child(8),
+        .admin-table td:nth-child(8) {
+            min-width: 220px;
+        }
+        /* เพิ่มพื้นที่คอลัมน์ file */
+        .admin-table th:nth-child(9),
+        .admin-table td:nth-child(9) {
+            min-width: 400px;
         }
 
         /* ปุ่มในตาราง (modify / delete) */

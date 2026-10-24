@@ -65,10 +65,10 @@ $result = $stmt->get_result();
                 <div class="dropdown-section">
                     <div class="dropdown-header">Type</div>
                     <ul class="dropdown-list">
-                        <li><a href="Novel.html">Novel</a></li>
-                        <li><a href="Comic.html">Comic</a></li>
-                        <li><a href="Manga.html">Manga</a></li>
-                        <li><a href="Artbook.html">Artbook</a></li>
+                        <li><a href="Novel.php">Novel</a></li>
+                        <li><a href="Comic.php">Comic</a></li>
+                        <li><a href="Manga.php">Manga</a></li>
+                        <li><a href="Artbook.php">Artbook</a></li>
                     </ul>
                 </div>
 
@@ -77,12 +77,12 @@ $result = $stmt->get_result();
                 <div class="dropdown-section">
                     <div class="dropdown-header">Genres</div>
                     <ul class="dropdown-list">
-                        <li><a href="Action.html">Action</a></li>
-                        <li><a href="Sci-fi.html">Sci-fi</a></li>
-                        <li><a href="Fantasy.html">Fantasy</a></li>
-                        <li><a href="Romance.html">Romance</a></li>
-                        <li><a href="Thriller.html">Thriller</a></li>
-                        <li><a href="Horror.html">Horror</a></li>
+                        <li><a href="Action.php">Action</a></li>
+                        <li><a href="Sci-fi.php">Sci-fi</a></li>
+                        <li><a href="Fantasy.php">Fantasy</a></li>
+                        <li><a href="Romance.php">Romance</a></li>
+                        <li><a href="Thriller.php">Thriller</a></li>
+                        <li><a href="Horror.php">Horror</a></li>
                     </ul>
                 </div>
             </div> 
@@ -109,41 +109,43 @@ $result = $stmt->get_result();
                 Your library
             </div>
             
-            <div class="book-grid">
-                <?php if ($result->num_rows > 0): ?>
-                    <?php while($row = $result->fetch_assoc()): ?>
-                        <div class="book-card">
-                            <!-- ดึงรูปปกมาแสดง -->
-                            <div class="book-cover" style="background-image: url('admin/uploads/<?php echo $row['bcover']; ?>'); background-size: cover; background-position: center;"></div>
-                            
-                            <!-- ดึงชื่อหนังสือ -->
-                            <div class="book-title"><?php echo htmlspecialchars($row['bname']); ?></div>
-                            
-                            <!-- ส่วนปุ่มกด 2 ปุ่ม -->
-                        <div class="card-actions" style="display: flex; gap: 8px; justify-content: space-between; margin-top: 10px;">
-                            <!-- ปุ่ม Download -->
-                            <a href="admin/uploads/<?php echo $row['bfile']; ?>" download="<?php echo htmlspecialchars($row['bname']); ?>" style="text-decoration: none; flex: 1;">
-                                <button class="btn-action" style="width: 100%; padding: 10px 0; font-size: 14px; background-color: #8b1c85; color: white; border: none; border-radius: 20px; cursor: pointer;">
-                                Download
-                                </button>
-                            </a>
-    
-                            <!-- ปุ่ม Read now -->
-                            <a href="admin/uploads/<?php echo $row['bfile']; ?>" target="_blank" style="text-decoration: none; flex: 1;">
-                                <button class="btn-action" style="width: 100%; padding: 10px 0; font-size: 14px; background-color: #8b1c85; color: white; border: none; border-radius: 20px; cursor: pointer;">
-                                Read now
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <div style="width: 100%; padding: 50px; text-align: center; color: #666;">
-                        <h3>คลังหนังสือของคุณยังว่างเปล่า</h3>
-                        <p>ไปเลือกซื้อหนังสือเล่มโปรดกันเถอะ!</p>
-                        <a href="index.php" style="color: #8b1c85; text-decoration: underline;">ไปที่หน้าแรก</a>
-                    </div>
-                <?php endif; ?>
+            <?php if ($result && $result->num_rows > 0): ?>
+    <div class="book-grid">
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="book-card">
+                <div class="book-cover"
+                     style="background-image: url('admin/uploads/<?php echo rawurlencode($row['bcover']); ?>'); background-size: cover; background-position: center;">
+                </div>
+
+                <div class="book-title"><?php echo htmlspecialchars($row['bname']); ?></div>
+
+                <div class="card-actions" style="display:flex; gap:8px; justify-content:space-between; margin-top:10px;">
+                    <a href="admin/uploads/<?php echo rawurlencode($row['bfile']); ?>"
+                       download="<?php echo htmlspecialchars($row['bname']); ?>"
+                       style="text-decoration:none; flex:1;">
+                        <button class="btn-action" style="width:100%; padding:10px 0; font-size:14px; background-color:#8b1c85; color:#fff; border:none; border-radius:20px; cursor:pointer;">
+                            Download
+                        </button>
+                    </a>
+
+                    <a href="admin/uploads/<?php echo rawurlencode($row['bfile']); ?>"
+                       target="_blank" rel="noopener"
+                       style="text-decoration:none; flex:1;">
+                        <button class="btn-action" style="width:100%; padding:10px 0; font-size:14px; background-color:#8b1c85; color:#fff; border:none; border-radius:20px; cursor:pointer;">
+                            Read now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
+<?php else: ?>
+    <div class="empty-message">
+        <h3>Your book collection is still empty.</h3>
+        <p>Let’s go pick out some interesting books!</p>
+        <a href="index.php" style="color:#8b1c85; text-decoration:underline;">Go to the homepage</a>
+    </div>
+<?php endif; ?>
             </div>
         </div>
     </div>

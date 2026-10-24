@@ -71,10 +71,10 @@ $conn->close();
                 <div class="dropdown-section">
                     <div class="dropdown-header">Type</div>
                     <ul class="dropdown-list">
-                        <li><a href="Novel.html">Novel</a></li>
-                        <li><a href="Comic.html">Comic</a></li>
-                        <li><a href="Manga.html">Manga</a></li>
-                        <li><a href="Artbook.html">Artbook</a></li>
+                        <li><a href="Novel.php">Novel</a></li>
+                        <li><a href="Comic.php">Comic</a></li>
+                        <li><a href="Manga.php">Manga</a></li>
+                        <li><a href="Artbook.php">Artbook</a></li>
                     </ul>
                 </div>
 
@@ -83,12 +83,12 @@ $conn->close();
                 <div class="dropdown-section">
                     <div class="dropdown-header">Genres</div>
                     <ul class="dropdown-list">
-                        <li><a href="Action.html">Action</a></li>
-                        <li><a href="Sci-fi.html">Sci-fi</a></li>
-                        <li><a href="Fantasy.html">Fantasy</a></li>
-                        <li><a href="Romance.html">Romance</a></li>
-                        <li><a href="Thriller.html">Thriller</a></li>
-                        <li><a href="Horror.html">Horror</a></li>
+                        <li><a href="Action.php">Action</a></li>
+                        <li><a href="Sci-fi.php">Sci-fi</a></li>
+                        <li><a href="Fantasy.php">Fantasy</a></li>
+                        <li><a href="Romance.php">Romance</a></li>
+                        <li><a href="Thriller.php">Thriller</a></li>
+                        <li><a href="Horror.php">Horror</a></li>
                     </ul>
                 </div>
             </div> 

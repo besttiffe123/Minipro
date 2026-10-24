@@ -11,23 +11,37 @@ if ($conn->connect_error) {
 if (isset($_GET['id'])) {
     $uid = $_GET['id'];
 
-    // เตรียมคำสั่ง SQL (ใช้ ? เพื่อป้องกัน SQL Injection)
-    $stmt = $conn->prepare("DELETE FROM euser WHERE uid = ?");
+    // 1. ลบข้อมูลใน order_details ที่ผูกกับบิลออเดอร์ของ User คนนี้ก่อน
+    $sql1 = "DELETE FROM order_details WHERE oid IN (SELECT oid FROM eorder WHERE uid = ?)";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("i", $uid);
+    $stmt1->execute();
+    $stmt1->close();
+
+    // 2. ลบข้อมูลบิลในตาราง eorder ของ User คนนี้
+    $sql2 = "DELETE FROM eorder WHERE uid = ?";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("i", $uid);
+    $stmt2->execute();
+    $stmt2->close();
+
+    // 3. เตรียมคำสั่ง SQL (ใช้ ? เพื่อป้องกัน SQL Injection) เพื่อลบข้อมูลผู้ใช้
+    $stmt3 = $conn->prepare("DELETE FROM euser WHERE uid = ?");
     // "i" หมายถึงตัวแปรประเภท Integer (ตัวเลข)
-    $stmt->bind_param("i", $uid);
+    $stmt3->bind_param("i", $uid);
 
     // ทำงานคำสั่ง SQL
-    if ($stmt->execute()) {
+    if ($stmt3->execute()) {
         // ลบสำเร็จ ให้เด้งกลับไปหน้าตารางผู้ใช้
         echo "<script>
-                alert('User data has been deleted');
-                window.location.href = 'foradmin.php'; 
+                alert('User data and related orders have been deleted');
+                window.location.href = 'Foradmin.php'; 
               </script>";
     } else {
-        echo "Error occurred while deleting data: " . $stmt->error;
+        echo "Error occurred while deleting data: " . $stmt3->error;
     }
 
-    $stmt->close();
+    $stmt3->close();
 } else {
     // กรณีไม่มีการส่งค่า id มา ให้เด้งกลับไปหน้าแอดมินเลย
     header("Location: Foradmin.php");

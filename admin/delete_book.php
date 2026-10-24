@@ -1,4 +1,5 @@
 <?php
+// เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "ebook");
 $conn->set_charset("utf8mb4");
 
@@ -9,7 +10,7 @@ if ($conn->connect_error) {
 if (isset($_GET['id'])) {
     $bid = $_GET['id'];
 
-    // 1. ดึงชื่อไฟล์รูปและไฟล์หนังสือเพื่อนำไปลบออกจากโฟลเดอร์ uploads (เพื่อไม่ให้เปลืองพื้นที่เซิร์ฟเวอร์)
+    // 1. ดึงชื่อไฟล์รูปและไฟล์หนังสือเพื่อนำไปลบออกจากโฟลเดอร์ uploads
     $sql_file = "SELECT bcover, bfile FROM books WHERE bid = ?";
     $stmt_file = $conn->prepare($sql_file);
     $stmt_file->bind_param("i", $bid);
@@ -26,20 +27,26 @@ if (isset($_GET['id'])) {
     }
     $stmt_file->close();
 
-    // 2. ลบข้อมูลการเชื่อมโยงหมวดหมู่ในตาราง book_genres ก่อน
+    // 2. ลบข้อมูลการเชื่อมโยงหมวดหมู่ในตาราง book_genres
     $stmt_genres = $conn->prepare("DELETE FROM book_genres WHERE bid = ?");
     $stmt_genres->bind_param("i", $bid);
     $stmt_genres->execute();
     $stmt_genres->close();
 
-    // 3. ลบข้อมูลหนังสือจากตาราง books
+    // 3. ลบข้อมูลหนังสือเล่มนี้ออกจากประวัติการสั่งซื้อ (order_details) เพื่อแก้ปัญหา Foreign Key
+    $stmt_orders = $conn->prepare("DELETE FROM order_details WHERE bid = ?");
+    $stmt_orders->bind_param("i", $bid);
+    $stmt_orders->execute();
+    $stmt_orders->close();
+
+    // 4. ลบข้อมูลหนังสือจากตาราง books
     $stmt = $conn->prepare("DELETE FROM books WHERE bid = ?");
     $stmt->bind_param("i", $bid);
 
     if ($stmt->execute()) {
         echo "<script>
                 alert('The book has been deleted');
-                window.location.href = 'foradmin.php'; 
+                window.location.href = 'Foradmin.php'; 
               </script>";
     } else {
         echo "An error occurred during deletion: " . $stmt->error;
@@ -47,7 +54,7 @@ if (isset($_GET['id'])) {
     
     $stmt->close();
 } else {
-    header("Location: foradmin.php");
+    header("Location: Foradmin.php");
     exit();
 }
 
