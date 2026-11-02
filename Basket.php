@@ -128,7 +128,7 @@ $result = $stmt->get_result();
                     <?php else: ?>
                         <div style="text-align: center; padding: 50px;">
                             <h3 style="color: #666;">No items in the cart</h3>
-                            <a href="index.php" style="color: #8b1c85; text-decoration: underline;">กลับไปเลือกซื้อหนังสือ</a>
+                            <a href="index.php" style="color: #8b1c85; text-decoration: underline;">Go back to the homepage to select and purchase books.</a>
                         </div>
                     <?php endif; ?>
                 </div>

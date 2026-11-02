@@ -148,7 +148,7 @@ foreach ($selected_books as $bid) {
             const cardType = document.getElementById('cardType').value;
             if (cardType === 'Galaxy Card') {
                 e.preventDefault(); // ยกเลิกการส่งข้อมูล
-                alert('Payment rejected: Galaxy Card cannot be used. Please switch to Cosmos Card');
+                alert('Payment rejected: Your Galaxy Card decline. Please use another payment method');
             }
         });
 
