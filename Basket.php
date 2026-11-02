@@ -117,7 +117,7 @@ $result = $stmt->get_result();
                                 </div>
                                 
                                 <!-- ลิงก์ไปไฟล์ลบสินค้าออกจากตะกร้า -->
-                                <a href="remove_from_cart.php?cid=<?php echo $row['cid']; ?>" onclick="return confirm('ต้องการลบหนังสือเล่มนี้ออกจากตะกร้าใช่หรือไม่?');" style="color: inherit;">
+                                <a href="remove_from_cart.php?cid=<?php echo $row['cid']; ?>" onclick="return confirm('Are you sure you want to remove this book from your cart?');" style="color: inherit;">
                                     <button type="button" class="btn-delete-item">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
